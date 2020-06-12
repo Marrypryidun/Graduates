@@ -1,0 +1,9 @@
+E:\2 курс\C#\Підготовка до кр\28 Graduates\28 Graduates\bin\Debug\28 Graduates.exe.config
+E:\2 курс\C#\Підготовка до кр\28 Graduates\28 Graduates\bin\Debug\28 Graduates.exe
+E:\2 курс\C#\Підготовка до кр\28 Graduates\28 Graduates\bin\Debug\28 Graduates.pdb
+E:\2 курс\C#\Підготовка до кр\28 Graduates\28 Graduates\obj\Debug\28 Graduates.csprojAssemblyReference.cache
+E:\2 курс\C#\Підготовка до кр\28 Graduates\28 Graduates\obj\Debug\28 Graduates.csproj.CoreCompileInputs.cache
+E:\2 курс\C#\Підготовка до кр\28 Graduates\28 Graduates\obj\Debug\28 Graduates.exe
+E:\2 курс\C#\Підготовка до кр\28 Graduates\28 Graduates\obj\Debug\28 Graduates.pdb
+E:\2 курс\C#\Підготовка до кр\28 Graduates\28 Graduates\bin\Debug\Graduates.mdf
+E:\2 курс\C#\Підготовка до кр\28 Graduates\28 Graduates\bin\Debug\Graduates_log.ldf

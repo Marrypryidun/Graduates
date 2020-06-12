@@ -77,34 +77,36 @@ namespace _28_Graduates
             reader.Close();
             conect.Close();
         }
+
+        public void Query3 (Connection conect, string k, DateTime first,DateTime second)
+        {
+            SqlCommand command = new SqlCommand(" SELECT Jobs.Position FROM Student " +
+                "INNER JOIN Graduates ON Student.Id = Graduates.StudentId " +
+                "INNER JOIN Jobs ON Student.Id = Jobs.StudentId " +
+                "WHERE Graduates.Level = 'Master' AND Graduates.Kafedra = @k AND Graduates.EndDate <= @second AND Graduates.EndDate >= @first " +
+                "GROUP By Jobs.Position", conect.Open());
+            command.Parameters.Add(new SqlParameter("@k", k));
+            command.Parameters.Add(new SqlParameter("@first", first));
+            command.Parameters.Add(new SqlParameter("@second", second));
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows) // если есть данные
+            {
+                // выводим названия столбцов
+                Console.WriteLine("{0}", reader.GetName(0));
+
+                while (reader.Read()) // построчно считываем данные
+                {
+
+                    object position = reader.GetValue(0);
        
-//    public void Query3Connection conect, string f)
-//        {
-//            SqlCommand command = new SqlCommand(" SELECT Jobs.PositionFROM Student
-//INNER JOIN Graduates ON Student.Id = Graduates.StudentId
-//INNER JOIN Jobs ON Student.Id = Jobs.StudentId
-//WHERE Graduates.Level = 'Master' AND Graduates.Kafedra = 'asoiu' AND Graduates.EndDate < '20200628'
-//GROUP By Jobs.Position", conect.Open());
-//            command.Parameters.Add(new SqlParameter("@f", f));
-//            SqlDataReader reader = command.ExecuteReader();
-//            if (reader.HasRows) // если есть данные
-//            {
-//                // выводим названия столбцов
-//                Console.WriteLine("{0}\t{1}", reader.GetName(0), reader.GetName(1));
-
-//                while (reader.Read()) // построчно считываем данные
-//                {
-
-//                    object position = reader.GetValue(0);
-//                    object number = reader.GetValue(1);
 
 
-//                    Console.WriteLine("{0}\t{1}", position, number);
-//                }
-//            }
+        Console.WriteLine("{0}", position);
+                }
+}
 
-//            reader.Close();
-//            conect.Close();
-//        }
+reader.Close();
+            conect.Close();
+        }
     }
 }

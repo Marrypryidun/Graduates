@@ -23,19 +23,20 @@ namespace _28_Graduates
                 Console.WriteLine("4. Change the department for a student.");
                 Console.WriteLine("5. Display all graduates who graduated with a bachelor's degree in certain specialty 2 years ago .");
                 Console.WriteLine("6. Display  the positions in which the largest number of graduates of a certain faculty works.");
-                Console.WriteLine("7. Display products for a certain group that has the specified parameters.");
-                Console.WriteLine("8. Production with parameters which were produced in the last quarter.");
+                Console.WriteLine("7. Display  jobs of graduates of masters of a certain department for a certain period.");
+                Console.WriteLine("8. Display graduates who have changed jobs more than 4 times.");
+                Console.WriteLine("9. Display the years and specialties where there was the largest number of graduates.");
 
 
                 string ch = Console.ReadLine();
                 switch (ch)
                 {
-                    //case "1":
-                    //    Read r = new Read();
-                    //    r.readProduct(conect);
-                    //    Console.ReadLine();
-                    //    Console.Clear();
-                    //    break;
+                    case "1":
+                        Read r = new Read();
+                        r.readStudent(conect);
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
                     case "2":
 
                         print.Print(conect, "SELECT * FROM Student");
@@ -74,34 +75,35 @@ namespace _28_Graduates
                         break;
                     case "6":
                         print.Print(conect, "SELECT Faculty FROM Graduates GROUP BY Faculty");
-                        Console.WriteLine("Enter id of parameters that not existed in product: ");
+                        Console.WriteLine("Enter name of faculty ");
                         string p = Console.ReadLine();
                         q.Query2(conect, p);
                         Console.ReadLine();
                         Console.Clear();
                         break;
-                    //case "7":
-                    //    print.Print(conect, "SELECT * FROM GroupsParameters");
-                    //    Console.WriteLine("Enter id of group: ");
-                    //    int g = Convert.ToInt32(Console.ReadLine());
-                    //    q.Query3(conect, g);
-                    //    Console.ReadLine();
-                    //    Console.Clear();
-                    //    break;
-                    //case "8":
-                    //    print.Print(conect, "SELECT Production.Name, Parameters.Name, ValuesProductionParameters.Value FROM ValuesProductionParameters " +
-                    //        "INNER JOIN Production ON ValuesProductionParameters.ProductionId = Production.Id INNER JOIN Parameters ON ValuesProductionParameters.ParameterId = Parameters.Id" +
-                    //        " WHERE  Production.ReleaseDate >= '20200101' AND Production.ReleaseDate < '20200501'");
-                    //    Console.ReadLine();
-                    //    Console.Clear();
-                    //    break;
-                    //case "9":
-                    //    print.Print(conect, "SELECT Enterprises.Id, Enterprises.Name, (Enterprises.HomelessPeople * 100) / Enterprises.NumberWorkpeople as PrecentHomeless,(Enterprises.HomeProblemPeople * 100) / Enterprises.NumberWorkpeople as PrecentProblem  " +
-                    //         "FROM Enterprises " +
-                    //         "WHERE((Enterprises.HomelessPeople * 100) / Enterprises.NumberWorkpeople) > ((Enterprises.HomeProblemPeople* 100) / Enterprises.NumberWorkpeople)");
-                    //    Console.ReadLine();
-                    //    Console.Clear();
-                    //    break;
+                    case "7":
+                        print.Print(conect, "SELECT Kafedra FROM Graduates GROUP BY Kafedra");
+                        Console.WriteLine("Enter name of kafedra:");
+                        string k = Console.ReadLine();
+                        DateTime first = new DateTime();
+                        Console.WriteLine("Enter first date of period in format 20/06/2001:");
+                        first = Convert.ToDateTime(Console.ReadLine());
+                        Console.WriteLine("Enter second date of period 2/06/2020:");
+                        DateTime second = Convert.ToDateTime(Console.ReadLine());
+                        q.Query3(conect, k,first,second);
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
+                    case "8":
+                        print.Print(conect, "SSELECT Student.Name,COUNT(Jobs.Position) FROM Student INNER JOIN Jobs ON Student.Id = Jobs.StudentId GROUP BY Student.Name HAVING COUNT(Jobs.Position) > 4'");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
+                    case "9":
+                        print.Print(conect, "SELECT Graduates.Speciality, DATEPART(year,Graduates.EndDate),COUNT(*) FROM Student INNER JOIN Graduates ON Student.Id = Graduates.StudentId GROUP BY Graduates.Speciality, DATEPART(year, Graduates.EndDate)");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
 
                     default:
                         {
